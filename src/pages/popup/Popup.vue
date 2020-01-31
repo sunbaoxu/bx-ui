@@ -10,8 +10,14 @@
       v-if="async"
       :position="position"
       @closePopupFn="async = false"
+      :width="width"
+      ref="popupId"
     >
-      <section class="popup-main">{{position}}</section>
+      <section class="popup-main">{{position}}
+        <section class="g-btns-box" v-if="!width && position=='right'">
+          <button @click="()=>{$refs.popupId.close()}">关闭 close</button>
+        </section>
+      </section>
     </bx-popup>
   </section>
 </template>
@@ -26,15 +32,18 @@ export default {
     return {
       arr: [],
       async :false,
-      position:''
+      position:'',
+      width:''
     };
   },
   methods: {
     typeFn (type){
       this.async = true;
       this.position = type;
-      if(type == 'top'){
-
+      if(type == 'right'){
+        this.width = '300'
+      } else {
+        this.width =''
       }
     }
   },
@@ -53,6 +62,7 @@ export default {
   }
   .popup-main{
     background: #fff;
+    width: 100%;
   }
 }
 </style>

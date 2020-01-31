@@ -99,8 +99,6 @@ export default {
     display: flex;
     justify-content: flex-end;
     .bx-popup-main{
-      width: auto;
-      flex: 0;
       animation: fadeRight .5s;
     }
   }
