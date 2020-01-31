@@ -1,40 +1,35 @@
 <template>
   <section 
-    class="lb-popup-wrap" 
+    class="bx-popup-wrap" 
     v-if="moveAsync"
     :class="{
       'g-cen-cen-box': position=='center',
       'g-cen-end': position == 'bottom',
       'right-box': position =='right',
-      'g-cen-end-close':animationAsync
+      'top-box':position =='top',
+      'g-cen-end-close':closeAsync
     }"
     :style="'background:rgba(0,0,0,'+backCorder+')'"
     @click.stop.self="backCloseFn"
     @touchmove.prevent 
     >
-    <main v-if="width" class="lb-popup-main" :style="{'max-width':width+'px'}">
-      <slot></slot>
-    </main>
-    <main v-else class="lb-popup-main">
+    <main class="bx-popup-main" :style="width?{'max-width':width+'px'}:''">
       <slot></slot>
     </main>
   </section>
   <section 
     v-else
-    class="lb-popup-wrap" 
+    class="bx-popup-wrap" 
     :class="{
       'g-cen-cen-box': position=='center',
       'g-cen-end': position == 'bottom',
       'right-box': position =='right',
-      'g-cen-end-close':animationAsync
+      'g-cen-end-close':closeAsync
     }"
     :style="'background:rgba(0,0,0,'+backCorder+')'"
     @click.stop.self="backCloseFn"
     >
-    <main v-if="width" class="lb-popup-main" :style="{'max-width':width+'px'}">
-      <slot></slot>
-    </main>
-    <main v-else class="lb-popup-main">
+    <main class="bx-popup-main" :style="width?{'max-width':width+'px'}:''">
       <slot></slot>
     </main>
   </section>
@@ -42,6 +37,7 @@
 
 <script>
 export default {
+  name:"bxPopup",
   props :{
     closeOnClickModal :{
       type :Boolean,
@@ -70,29 +66,29 @@ export default {
   },
   data (){
     return {
-      animationAsync: false
+      closeAsync: false
     }
   },
   methods : {
     close () {
-      this.animationAsync=true;
+      this.closeAsync = true;
       setTimeout(()=>{
         this.$emit('closePopupFn')
       },500)
     },
     backCloseFn () {
       if(!this.clickWrapAsync){return false};
-      if(this.position == 'bottom' || this.position == 'right'){
-        this.close()
-      } else{
+      if(this.position =='center'){
         this.$emit('closePopupFn')
+      } else{
+        this.close()
       }
     }
   }
 }
 </script>
 <style lang="scss" scoped>
-.lb-popup-wrap{
+.bx-popup-wrap{
   position: fixed;
   left  :0;
   right :0;
@@ -102,34 +98,72 @@ export default {
   &.right-box{
     display: flex;
     justify-content: flex-end;
-    .lb-popup-main{
-      animation: lbfadeInLeft .5s;
+    .bx-popup-main{
+      width: auto;
+      flex: 0;
+      animation: fadeRight .5s;
     }
-    
   }
-  .lb-popup-main{
+  &.g-cen-end{
+    .bx-popup-main{
+      animation: fadeDown .5s;
+    }
+  }
+  &.top-box{
+    .bx-popup-main{
+      animation: fadeUp .5s;
+    }
+  }
+
+
+  &.g-cen-end-close.g-cen-end{
+    .bx-popup-main{
+      animation: fadeDownClose .5s!important;
+    }
+  }
+  &.g-cen-end-close.top-box{
+    .bx-popup-main{
+      animation: fadeUpClose .5s!important;
+    }
+  }
+  &.g-cen-end-close.right-box{
+    .bx-popup-main{
+      animation: fadeRightClose .5s!important;
+    }
+  }
+
+
+  .bx-popup-main{
     flex:1;
     display: flex;
     justify-content: center;
   }
-  &.g-cen-end{
-    .lb-popup-main{
-      animation: lbfadeInUp .5s;
-    }
+}
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translate3d(0,-100%,0);
   }
-  &.g-cen-end-close.g-cen-end{
-    .lb-popup-main{
-      animation: fadeOutDown .5s!important;
-    }
-  }
-  &.g-cen-end-close.right-box{
-    .lb-popup-main{
-      animation: lbfadeOutRight .5s!important;
-    }
+  to {
+    opacity: 1;
+    transform: none;
   }
 }
 
-@keyframes lbfadeInUp {
+@keyframes fadeUpClose {
+  from {
+    opacity: 1;
+    transform: none;
+  }
+
+  to {
+    opacity: 0;
+    transform: translate3d(0, -100%, 0);
+  }
+}
+
+@keyframes fadeDown {
   from {
     opacity: 0;
     transform: translate3d(0,100%,0);
@@ -140,9 +174,10 @@ export default {
   }
 }
 
-@keyframes lbfadeOutDown {
+@keyframes fadeDownClose {
   from {
     opacity: 1;
+    transform: none;
   }
 
   to {
@@ -151,7 +186,7 @@ export default {
   }
 }
 
-@keyframes lbfadeInLeft {
+@keyframes fadeRight {
   from {
     opacity: 0;
     transform: translate3d(100%,0,0);
@@ -162,9 +197,10 @@ export default {
   }
 }
 
-@keyframes lbfadeOutRight {
+@keyframes fadeRightClose {
   from {
     opacity: 1;
+    transform: none;
   }
 
   to {

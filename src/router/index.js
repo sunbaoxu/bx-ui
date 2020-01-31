@@ -12,7 +12,7 @@ let router =  new Router({
   routes: [
     //登陆
     {path: '/home',name: 'Home',component: Home,meta:{title:'列表'}},
-    {path: '/popup',name: 'Popup',component: Popup,meta:{title:'列表'}},
+    {path: '/popup',name: 'Popup',component: Popup,meta:{title:'popup'}},
   ]
 });
 
