@@ -7,6 +7,7 @@
 <script>
 
 export default {
+  name:"bxAlert",
   data() {
     return {
       arr: []

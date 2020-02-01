@@ -6,9 +6,8 @@ const components = [
 ]
 const install = (Vue, opts = {}) =>{
 	components.forEach(component => {
-    console.log(component,'aaaaaaaa')
-	    Vue.component(component.name, component);
-    });
+    Vue.component(component.name, component);
+  });
 }
 
 if (typeof window !== 'undefined' && window.Vue) {
