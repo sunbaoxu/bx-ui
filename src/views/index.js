@@ -1,8 +1,8 @@
-// import bxAlert from './alert/index.js';
-// import bxSwiper from './swiper/index.js';
+import bxAlert from './alert/index.js';
+import bxPopup from './popup/index.js';
 const components = [
-  // bxAlert,
-  // bxSwiper
+  bxAlert,
+  bxPopup
 ]
 const install = (Vue, opts = {}) =>{
 	components.forEach(component => {
@@ -17,6 +17,6 @@ if (typeof window !== 'undefined' && window.Vue) {
  
 export default {
 	install,
-  // bxAlert,
-  // bxSwiper
+  bxAlert,
+  bxPopup
 }

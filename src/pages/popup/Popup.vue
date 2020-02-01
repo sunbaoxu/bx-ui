@@ -13,7 +13,7 @@
       :width="width"
       ref="popupId"
     >
-      <section class="popup-main">{{position}}
+      <section class="popup-main" :class="{'width': position=='right'}">{{position}}
         <section class="g-btns-box" v-if="!width && position=='right'">
           <button @click="()=>{$refs.popupId.close()}">关闭 close</button>
         </section>
@@ -58,7 +58,9 @@ export default {
   }
   .popup-main{
     background: #fff;
-    width: 100%;
+    &.width{
+       width: 100%;
+    }
   }
 }
 </style>
