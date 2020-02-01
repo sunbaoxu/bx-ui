@@ -11,7 +11,7 @@ let router =  new Router({
   // base : '/'+process.env.ROUTER_BASE,
   routes: [
     //登陆
-    {path: '/home',name: 'Home',component: Home,meta:{title:'列表'}},
+    {path: '/',name: 'Home',component: Home,meta:{title:'列表'}},
     {path: '/popup',name: 'Popup',component: Popup,meta:{title:'popup'}},
   ]
 });

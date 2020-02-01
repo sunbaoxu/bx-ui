@@ -30,7 +30,6 @@ export default {
   },
   data() {
     return {
-      arr: [],
       async :false,
       position:'',
       width:''
@@ -46,9 +45,6 @@ export default {
         this.width =''
       }
     }
-  },
-  mounted() {
-    
   }
 };
 </script>
