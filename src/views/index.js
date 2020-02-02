@@ -1,7 +1,7 @@
 import bxAlert from './alert/index.js';
 import bxPopup from './popup/index.js';
-require('@/assets/css/reset.scss');
-require('@/assets/css/common.scss');
+// require('@/assets/css/reset.scss');
+// require('@/assets/css/common.scss');
 const components = [
   bxAlert,
   bxPopup
