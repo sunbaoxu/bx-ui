@@ -1,7 +1,7 @@
 {
   "name": "bx-ui",
-  "description": "A Vue.js project",
-  "version": "1.0.2",
+  "description": "reference global CSS",
+  "version": "1.0.3",
   "author": "sunbaoxu <1194063234@qq.com>",
   "license": "MIT",
   "private": false,
